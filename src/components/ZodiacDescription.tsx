@@ -11,7 +11,7 @@ export const ZodiacDescription = (props: ZodiacDescriptionProps) => {
   return (
     <div className={s.root}>
       <h2>{sign}</h2>
-      {horoscope ? <p>{horoscope}</p> : <p>Loading description...</p>}
+      <p>{horoscope}</p>
     </div>
   )
 }
