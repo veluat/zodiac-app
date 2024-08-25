@@ -1,16 +1,7 @@
 import axios, { AxiosResponse } from 'axios'
 
-type ZodiacSign = {
-  sign: string
-  name: string
-  icon: string
-  horoscope: string
-  ru: string
-  en: string
-}
-
 type ZodiacData = {
-  [key: string]: Omit<ZodiacSign, 'name' | 'icon'>
+  horoscope: string
 }
 
 interface ZodiacRequest {
@@ -22,7 +13,7 @@ interface ZodiacRequest {
 export const fetchZodiacDescription = async (
   sign: string,
   language: 'ru' | 'en',
-  period: 'today' = 'today'
+  period: 'today'
 ): Promise<string | null> => {
   try {
     const request: ZodiacRequest = {
@@ -34,9 +25,11 @@ export const fetchZodiacDescription = async (
       'https://poker247tech.ru/get_horoscope/',
       request
     )
+
     const zodiacData = response.data
-    if (zodiacData[request.language]) {
-      return zodiacData[request.language].horoscope
+    const { horoscope } = zodiacData
+    if (horoscope) {
+      return horoscope
     } else {
       return null
     }

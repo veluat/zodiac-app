@@ -1,22 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
-import { getLanguage, translations } from '@/utils/i18n'
+import { getLanguage, translations, zodiacSignData } from '@/utils/i18n'
 import { fetchZodiacDescription } from '@/services/api'
 import { ZodiacSign } from '@/components/ZodiacSign'
 import { ZodiacDescription } from '@/components/ZodiacDescription'
-import { zodiacSignData } from '@/utils/i18n'
 import s from './App.module.scss'
 
 const App: React.FC = () => {
   const [zodiacData, setZodiacData] = useState<
     { sign: string; signEn: string; period: string; icon: string }[]
   >([])
-  const [selectedSign, setSelectedSign] = useState<{ sign: string; signEn: string } | null>({
-    sign: zodiacSignData[0].signEn,
-    signEn: zodiacSignData[0].signEn,
-  })
+  const [selectedSign, setSelectedSign] = useState<{ sign: string; signEn: string } | null>(null)
   const [language, setLanguage] = useState<'ru' | 'en'>(getLanguage())
-  const [description, setDescription] = useState<string | null>(null)
+  const [horoscope, setHoroscope] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
@@ -33,10 +29,19 @@ const App: React.FC = () => {
   useEffect(() => {
     if (selectedSign) {
       setIsLoading(true)
-      fetchZodiacDescription(selectedSign.signEn, language, 'today').then(horoscope => {
-        setDescription(horoscope)
-        setIsLoading(false)
-      })
+      fetchZodiacDescription(selectedSign.signEn, language, 'today')
+        .then(horoscope => {
+          if (horoscope) {
+            setHoroscope(horoscope)
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching horoscope:', error)
+          setHoroscope(null)
+        })
+        .finally(() => {
+          setIsLoading(false)
+        })
     }
   }, [selectedSign, language])
 
@@ -51,9 +56,12 @@ const App: React.FC = () => {
 
   return (
     <div>
-      {selectedSign && description ? (
+      {selectedSign && horoscope ? (
         <div>
-          <ZodiacDescription sign={selectedSign.sign} horoscope={description} />
+          <ZodiacDescription
+            horoscope={horoscope}
+            sign={translations[language].zodiacSigns[0].sign}
+          />
           <button onClick={() => setSelectedSign(null)}>{translations[language].backButton}</button>
         </div>
       ) : (
@@ -67,7 +75,6 @@ const App: React.FC = () => {
           ))}
         </div>
       )}
-
       {isLoading && <div>Loading...</div>}
       <LanguageSwitcher language={language} onLanguageSwitch={handleLanguageSwitch} />
     </div>
