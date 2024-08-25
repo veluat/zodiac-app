@@ -4,10 +4,9 @@ type ZodiacSign = {
   sign: string
   name: string
   icon: string
-  description: {
-    ru: string
-    en: string
-  }
+  horoscope: string
+  ru: string
+  en: string
 }
 
 type ZodiacData = {
@@ -15,27 +14,29 @@ type ZodiacData = {
 }
 
 interface ZodiacRequest {
-  language: 'ru' | 'en'
+  sign: string
+  language: 'original' | 'translated'
   period: 'today'
 }
 
 export const fetchZodiacDescription = async (
-  language: 'ru' | 'en' = 'ru',
+  sign: string,
+  language: 'ru' | 'en',
   period: 'today' = 'today'
 ): Promise<string | null> => {
   try {
     const request: ZodiacRequest = {
-      language,
+      sign,
+      language: language === 'ru' ? 'original' : 'translated',
       period,
     }
     const response: AxiosResponse<ZodiacData> = await axios.post(
       'https://poker247tech.ru/get_horoscope/',
       request
     )
-
     const zodiacData = response.data
-    if (zodiacData[language]) {
-      return zodiacData[language].description[language]
+    if (zodiacData[request.language]) {
+      return zodiacData[request.language].horoscope
     } else {
       return null
     }

@@ -1,21 +1,31 @@
-import { useState, useEffect } from 'react'
-import { ZodiacSign } from '@/components/ZodiacSign'
-import { getLanguage, translations } from '@/utils/i18n'
-import { fetchZodiacDescription } from '@/services/api'
+import { ZodiacDescription } from './components/ZodiacDescription'
+import { useEffect, useState } from 'react'
+import { getLanguage, translations } from './utils/i18n'
+import { fetchZodiacDescription } from './services/api'
+import s from './App.module.scss'
+import { ZodiacSign } from './components/ZodiacSign'
+import { LanguageSwitcher } from './components/LanguageSwitcher'
 
-const App: React.FC = () => {
-  const [zodiacData, setZodiacData] = useState<{ sign: string; period: string; icon: string }[]>([])
+const App = () => {
+  const [zodiacSigns, setZodiacSigns] = useState<{ sign: string; period: string; icon: string }[]>(
+    []
+  )
   const [selectedSign, setSelectedSign] = useState<string | null>(null)
   const [language, setLanguage] = useState<'ru' | 'en'>(getLanguage())
   const [description, setDescription] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    setZodiacData(translations[language].zodiacSigns)
+    setZodiacSigns(translations['en'].zodiacSigns)
   }, [language])
 
   useEffect(() => {
     if (selectedSign) {
-      fetchZodiacDescription(language, 'today').then(setDescription)
+      setIsLoading(true)
+      fetchZodiacDescription(selectedSign, language, 'today').then(horoscope => {
+        setDescription(horoscope)
+        setIsLoading(false)
+      })
     }
   }, [selectedSign, language])
 
@@ -23,28 +33,31 @@ const App: React.FC = () => {
     setSelectedSign(sign)
   }
 
-  const handleLanguageSwitch = (newLanguage: 'ru' | 'en') => {
+  const handleLanguageSwitch = () => {
+    const newLanguage: 'ru' | 'en' = language === 'ru' ? 'en' : 'ru'
     setLanguage(newLanguage)
   }
 
   return (
     <div>
-      <div className="zodiac-signs">
-        {zodiacData.map(sign => (
-          <ZodiacSign key={sign.sign} signProps={sign} onClick={() => handleSignClick(sign.sign)} />
-        ))}
-      </div>
-      {selectedSign && description && (
-        <div className="zodiac-description">
-          <h2>{selectedSign}</h2>
-          <p>{description}</p>
+      {selectedSign && description ? (
+        <div className={s.description}>
+          <ZodiacDescription sign={selectedSign} horoscope={description} />
           <button onClick={() => setSelectedSign(null)}>{translations[language].backButton}</button>
         </div>
+      ) : (
+        <div className={s.zodiacSigns}>
+          {zodiacSigns.map(sign => (
+            <ZodiacSign
+              key={sign.sign}
+              signProps={sign}
+              onClick={() => handleSignClick(sign.sign)}
+            />
+          ))}
+        </div>
       )}
-      <div className="language-buttons">
-        <button onClick={() => handleLanguageSwitch('ru')}>{translations.ru.switchLanguage}</button>
-        <button onClick={() => handleLanguageSwitch('en')}>{translations.en.switchLanguage}</button>
-      </div>
+      {isLoading && <div>Loading...</div>}
+      <LanguageSwitcher language={language} onLanguageSwitch={handleLanguageSwitch} />
     </div>
   )
 }
