@@ -1,3 +1,28 @@
-.root {
-  width: 500px;
+.signDescription {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+
+  width: 700px;
+
+  font-size: 20px;
+  font-weight: 600;
+  color: #087096;
+  text-align: center;
+
+  h2 {
+    all: unset;
+
+    padding-top: 10px;
+
+    font-size: 40px;
+    font-weight: 600;
+    color: #087096;
+  }
+
+  p {
+    line-height: 1.6;
+  }
 }

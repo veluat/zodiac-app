@@ -55,9 +55,10 @@ const App: React.FC = () => {
   }
 
   return (
-    <div>
+    <div className={s.mainBlock}>
+      <LanguageSwitcher language={language} onLanguageSwitch={handleLanguageSwitch} />
       {selectedSign && horoscope ? (
-        <div>
+        <div className={s.signDescription}>
           <ZodiacDescription
             horoscope={horoscope}
             sign={translations[language].zodiacSigns[0].sign}
@@ -76,7 +77,6 @@ const App: React.FC = () => {
         </div>
       )}
       {isLoading && <div>Loading...</div>}
-      <LanguageSwitcher language={language} onLanguageSwitch={handleLanguageSwitch} />
     </div>
   )
 }

@@ -1,0 +1,31 @@
+.languageSwitcher {
+  button {
+    all: unset;
+
+    cursor: pointer;
+
+    width: 200px;
+    height: 50px;
+    margin-bottom: 30px;
+
+    font-size: 20px;
+    font-weight: 600;
+    color: #087096;
+    text-align: center;
+
+    background-color: #fefaea;
+    border: none;
+    border-radius: 15px;
+    box-shadow:
+      0 1px 2px 0 rgb(8 112 150 / 70%),
+      1px 2px 4px 0 rgb(8 112 150 / 70%),
+      2px 4px 8px 0 rgb(8 112 150 / 70%),
+      2px 4px 16px 0 rgb(8 112 150 / 70%);
+
+    &:hover {
+      color: white;
+      background: rgb(8 112 150 / 70%);
+      transition: color 0.1s ease-out;
+    }
+  }
+}

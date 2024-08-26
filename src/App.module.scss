@@ -1,5 +1,96 @@
-.zodiacSigns {
-  img {
-    width: 100px;
+.mainBlock {
+  position: relative;
+
+  display: flex;
+  flex-flow: column wrap;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 30px 0;
+
+  .signDescription {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+
+    button {
+      all: unset;
+
+      cursor: pointer;
+
+      width: 200px;
+      height: 50px;
+
+      font-size: 20px;
+      font-weight: 600;
+      color: #087096;
+      text-align: center;
+
+      background-color: #fefaea;
+      border: none;
+      border-radius: 15px;
+      box-shadow:
+        0 1px 2px 0 rgb(8 112 150 / 70%),
+        1px 2px 4px 0 rgb(8 112 150 / 70%),
+        2px 4px 8px 0 rgb(8 112 150 / 70%),
+        2px 4px 16px 0 rgb(8 112 150 / 70%);
+
+      &:hover {
+        color: white;
+        background: #087096;
+      }
+    }
+  }
+
+  .zodiacSigns {
+    display: grid;
+    grid-gap: 30px;
+    grid-template-columns: repeat(3, 300px);
+    grid-template-rows: repeat(4, 1fr);
+
+    text-align: center;
+
+    h3,
+    p {
+      margin-bottom: 5px;
+
+      font-size: 20px;
+      font-weight: 600;
+      color: #087096;
+      text-align: center;
+    }
+
+    h3 {
+      padding-top: 10px;
+      font-size: 28px;
+    }
+
+    p {
+      padding-bottom: 20px;
+    }
+
+    img {
+      width: 100px;
+      padding-top: 20px;
+    }
+
+    @media (width <= 1000px) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(6, 1fr);
+    }
+
+    @media (width <= 768px) {
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-rows: repeat(1, 1fr);
+    }
+  }
+
+  @media (width <= 768px) {
+    padding: 8rem 0 6rem;
   }
 }

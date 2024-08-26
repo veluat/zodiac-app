@@ -11,14 +11,24 @@ import cancer from '@/assets/cancer.png'
 import libra from '@/assets/libra.png'
 import virgo from '@/assets/virgo.png'
 
-interface Translations {
+export interface ZodiacSign {
+  sign: string
+  signEn: string
+  signRu: string
+  periodEn: string
+  periodRu: string
+  icon: string
+  id: string
+}
+
+export interface Translations {
   ru: {
-    zodiacSigns: { sign: string; period: string; icon: string }[]
+    zodiacSigns: ZodiacSign[]
     backButton: string
     switchLanguage: string
   }
   en: {
-    zodiacSigns: { sign: string; period: string; icon: string }[]
+    zodiacSigns: ZodiacSign[]
     backButton: string
     switchLanguage: string
   }
@@ -30,8 +40,10 @@ export const zodiacSignData: {
   periodEn: string
   periodRu: string
   icon: string
+  id: string
 }[] = [
   {
+    id: '1',
     signEn: 'aries',
     signRu: 'овен',
     periodEn: 'March 21 - April 20',
@@ -39,6 +51,7 @@ export const zodiacSignData: {
     icon: `${aries}`,
   },
   {
+    id: '2',
     signEn: 'taurus',
     signRu: 'телец',
     periodEn: 'April 21 - May 21',
@@ -46,6 +59,7 @@ export const zodiacSignData: {
     icon: `${taurus}`,
   },
   {
+    id: '3',
     signEn: 'gemini',
     signRu: 'близнецы',
     periodEn: 'May 22 - June 21',
@@ -53,6 +67,7 @@ export const zodiacSignData: {
     icon: `${gemini}`,
   },
   {
+    id: '4',
     signEn: 'cancer',
     signRu: 'рак',
     periodEn: 'June 22 - July 22',
@@ -60,6 +75,7 @@ export const zodiacSignData: {
     icon: `${cancer}`,
   },
   {
+    id: '5',
     signEn: 'leo',
     signRu: 'лев',
     periodEn: 'July 23 - August 23',
@@ -67,6 +83,7 @@ export const zodiacSignData: {
     icon: `${leo}`,
   },
   {
+    id: '6',
     signEn: 'virgo',
     signRu: 'дева',
     periodEn: 'August 24 - September 23',
@@ -74,6 +91,7 @@ export const zodiacSignData: {
     icon: `${virgo}`,
   },
   {
+    id: '7',
     signEn: 'libra',
     signRu: 'весы',
     periodEn: 'September 24 - October 23',
@@ -81,6 +99,7 @@ export const zodiacSignData: {
     icon: `${libra}`,
   },
   {
+    id: '8',
     signEn: 'scorpio',
     signRu: 'скорпион',
     periodEn: 'October 24 - November 22',
@@ -88,6 +107,7 @@ export const zodiacSignData: {
     icon: `${scorpio}`,
   },
   {
+    id: '9',
     signEn: 'sagittarius',
     signRu: 'стрелец',
     periodEn: 'November 23 - December 21',
@@ -95,6 +115,7 @@ export const zodiacSignData: {
     icon: `${sagittarius}`,
   },
   {
+    id: '10',
     signEn: 'capricorn',
     signRu: 'козерог',
     periodEn: 'December 22 - January 20',
@@ -102,6 +123,7 @@ export const zodiacSignData: {
     icon: `${capricorn}`,
   },
   {
+    id: '11',
     signEn: 'aquarius',
     signRu: 'водолей',
     periodEn: 'January 21 - February 19',
@@ -109,6 +131,7 @@ export const zodiacSignData: {
     icon: `${aquarius}`,
   },
   {
+    id: '12',
     signEn: 'pisces',
     signRu: 'рыбы',
     periodEn: 'February 20 - March 20',
@@ -119,19 +142,29 @@ export const zodiacSignData: {
 
 export const translations: Translations = {
   ru: {
-    zodiacSigns: zodiacSignData.map(({ signRu, periodRu, icon }) => ({
+    zodiacSigns: zodiacSignData.map(({ signRu, periodRu, icon, id }) => ({
       sign: signRu,
+      signEn: zodiacSignData.find(item => item.id === id)?.signEn || '',
+      signRu,
       period: periodRu,
+      periodEn: zodiacSignData.find(item => item.id === id)?.periodEn || '',
+      periodRu,
       icon,
+      id,
     })),
     backButton: 'Назад',
     switchLanguage: 'Сменить язык',
   },
   en: {
-    zodiacSigns: zodiacSignData.map(({ signEn, periodEn, icon }) => ({
+    zodiacSigns: zodiacSignData.map(({ signEn, periodEn, icon, id }) => ({
       sign: signEn,
+      signEn,
+      signRu: zodiacSignData.find(item => item.id === id)?.signRu || '',
       period: periodEn,
+      periodEn,
+      periodRu: zodiacSignData.find(item => item.id === id)?.periodRu || '',
       icon,
+      id,
     })),
     backButton: 'Back',
     switchLanguage: 'Switch Language',

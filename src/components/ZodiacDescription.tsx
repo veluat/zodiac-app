@@ -1,4 +1,5 @@
 import React from 'react'
+import s from './ZodiacDescription.module.scss'
 
 interface ZodiacDescriptionProps {
   horoscope: string
@@ -9,7 +10,7 @@ export const ZodiacDescription: React.FC<ZodiacDescriptionProps> = ({ horoscope,
   const signTitle = sign.charAt(0).toUpperCase() + sign.slice(1)
 
   return (
-    <div>
+    <div className={s.signDescription}>
       <h2>{signTitle}</h2>
       <p>{horoscope}</p>
     </div>
