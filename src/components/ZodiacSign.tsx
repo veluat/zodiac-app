@@ -1,15 +1,17 @@
 import s from './ZodiacSign.module.scss'
 
 interface ZodiacSignProps {
-  signProps: { sign: string; period: string; icon: string }
-  onClick: (sign: string) => void
+  sign: string
+  period?: string
+  icon?: string
+  onClick?: (sign: string) => void
 }
 
-export const ZodiacSign = ({ signProps, onClick }: ZodiacSignProps) => {
-  const { sign, period, icon } = signProps
+export const ZodiacSign = ({ sign, period, icon, onClick }: ZodiacSignProps) => {
   const signTitle = sign.charAt(0).toUpperCase() + sign.slice(1)
+
   return (
-    <div className={s.gridItem} onClick={() => onClick(sign)}>
+    <div className={s.gridItem} onClick={() => onClick?.(sign)}>
       <img src={icon} alt={sign} />
       <h3>{signTitle}</h3>
       <p>{period}</p>

@@ -1,17 +1,22 @@
-import React from 'react'
 import s from './ZodiacDescription.module.scss'
 
 interface ZodiacDescriptionProps {
   horoscope: string
-  sign: string
+  language: 'ru' | 'en'
+  signRu: string
+  signEn: string
 }
 
-export const ZodiacDescription: React.FC<ZodiacDescriptionProps> = ({ horoscope, sign }) => {
-  const signTitle = sign.charAt(0).toUpperCase() + sign.slice(1)
-
+export const ZodiacDescription = ({
+  signEn,
+  signRu,
+  horoscope,
+  language,
+}: ZodiacDescriptionProps) => {
+  const title = language === 'ru' ? signRu : signEn
   return (
     <div className={s.signDescription}>
-      <h2>{signTitle}</h2>
+      <h3>{title}</h3>
       <p>{horoscope}</p>
     </div>
   )

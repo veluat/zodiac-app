@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
-import { getLanguage, translations, zodiacSignData } from '@/utils/i18n'
+import { getLanguage, translations, zodiacSignsData } from '@/utils/i18n'
 import { fetchZodiacDescription } from '@/services/api'
 import { ZodiacSign } from '@/components/ZodiacSign'
 import { ZodiacDescription } from '@/components/ZodiacDescription'
@@ -8,18 +8,23 @@ import s from './App.module.scss'
 
 const App: React.FC = () => {
   const [zodiacData, setZodiacData] = useState<
-    { sign: string; signEn: string; period: string; icon: string }[]
+    { sign: string; signEn: string; signRu: string; period: string; icon: string }[]
   >([])
-  const [selectedSign, setSelectedSign] = useState<{ sign: string; signEn: string } | null>(null)
+  const [selectedSign, setSelectedSign] = useState<{
+    sign: string
+    signEn: string
+    signRu: string
+  } | null>(null)
   const [language, setLanguage] = useState<'ru' | 'en'>(getLanguage())
   const [horoscope, setHoroscope] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     setZodiacData(
-      zodiacSignData.map(({ signEn, signRu, periodEn, periodRu, icon }) => ({
-        sign: language === 'ru' ? signRu : signEn,
+      zodiacSignsData.map(({ sign, signEn, signRu, periodEn, periodRu, icon }) => ({
+        sign,
         signEn,
+        signRu,
         period: language === 'ru' ? periodRu : periodEn,
         icon,
       }))
@@ -29,7 +34,7 @@ const App: React.FC = () => {
   useEffect(() => {
     if (selectedSign) {
       setIsLoading(true)
-      fetchZodiacDescription(selectedSign.signEn, language, 'today')
+      fetchZodiacDescription(selectedSign.sign, language, 'today')
         .then(horoscope => {
           if (horoscope) {
             setHoroscope(horoscope)
@@ -45,8 +50,8 @@ const App: React.FC = () => {
     }
   }, [selectedSign, language])
 
-  const handleSignClick = (sign: string, signEn: string) => {
-    setSelectedSign({ sign, signEn })
+  const handleSignClick = (sign: string, signEn: string, signRu: string) => {
+    setSelectedSign({ sign, signEn, signRu })
   }
 
   const handleLanguageSwitch = () => {
@@ -60,8 +65,10 @@ const App: React.FC = () => {
       {selectedSign && horoscope ? (
         <div className={s.signDescription}>
           <ZodiacDescription
+            signEn={selectedSign.signEn}
+            signRu={selectedSign.signRu}
             horoscope={horoscope}
-            sign={translations[language].zodiacSigns[0].sign}
+            language={language}
           />
           <button onClick={() => setSelectedSign(null)}>{translations[language].backButton}</button>
         </div>
@@ -70,8 +77,10 @@ const App: React.FC = () => {
           {zodiacData.map(sign => (
             <ZodiacSign
               key={sign.sign}
-              signProps={sign}
-              onClick={() => handleSignClick(sign.sign, sign.signEn)}
+              sign={language === 'ru' ? sign.signRu : sign.signEn}
+              period={sign.period}
+              icon={sign.icon}
+              onClick={() => handleSignClick(sign.sign, sign.signEn, sign.signRu)}
             />
           ))}
         </div>
