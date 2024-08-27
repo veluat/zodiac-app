@@ -1,0 +1,11 @@
+.gridItem {
+  background-color: var(--color-background);
+  border: none;
+  border-radius: 15px;
+  box-shadow: var(--box-shadow);
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+  }
+}
