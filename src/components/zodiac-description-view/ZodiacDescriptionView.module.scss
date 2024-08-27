@@ -1,0 +1,39 @@
+@import 'src/style/mixins';
+
+.signDescription {
+  @include section-heading;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+
+  width: 1000px;
+
+  h3 {
+    all: unset;
+
+    margin-top: 30px;
+
+    font-size: 40px;
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+
+  p {
+    margin-bottom: 30px;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 1030px) {
+    width: 700px;
+  }
+
+  @media (max-width: 768px) {
+    width: 300px;
+
+    h3 {
+      margin-top: 15px;
+    }
+  }
+}
