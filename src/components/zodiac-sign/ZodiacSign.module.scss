@@ -13,6 +13,8 @@
   }
 
   & {
+    box-shadow: var(--box-shadow);
+
     h3 {
       padding-top: 0.625rem;
     }
@@ -25,8 +27,6 @@
       width: 6.25rem;
       padding-top: 1.25rem;
     }
-
-    box-shadow: var(--box-shadow);
   }
 
   @media (max-width: 870px) {
