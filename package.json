@@ -16,7 +16,7 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@eslint/js": "^9.9.0",
+    "@eslint/js": "^9.9.1",
     "@it-incubator/eslint-config": "^1.0.3",
     "@it-incubator/prettier-config": "^0.1.2",
     "@it-incubator/stylelint-config": "^2.0.0",
