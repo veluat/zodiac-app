@@ -1,8 +1,8 @@
 import { useZodiacContext } from '@/hook/useZodiacContext'
-import { LanguageSwitcher } from '@/components/language-switcher/LanguageSwitcher'
 import { ZodiacSignsList } from '@/components/zodiac-sign-list/ZodiacSignsList'
 import { ZodiacDescriptionView } from '@/components/zodiac-description-view/ZodiacDescriptionView'
 import s from './App.module.scss'
+import { Header } from '@/components/header/Header.tsx'
 
 const App = () => {
   const {
@@ -16,16 +16,23 @@ const App = () => {
     handleBackClick,
   } = useZodiacContext()
 
+  const isDescriptionView = !!(selectedSign && horoscope)
+
   return (
     <div className={s.mainBlock}>
-      <LanguageSwitcher language={language} onLanguageSwitch={handleLanguageSwitch} />
-      {selectedSign && horoscope ? (
+      <Header
+        handleBackClick={handleBackClick}
+        language={language}
+        onLanguageSwitch={handleLanguageSwitch}
+        showBackButton={isDescriptionView}
+      />
+
+      {isDescriptionView ? (
         <ZodiacDescriptionView
           signEn={selectedSign.signEn}
           signRu={selectedSign?.signRu || ''}
           horoscope={horoscope}
           language={language}
-          handleBackClick={handleBackClick}
         />
       ) : (
         <ZodiacSignsList

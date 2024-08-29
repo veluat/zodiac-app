@@ -1,39 +1,15 @@
-html,
-body,
-#root {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
 :root {
   --color-font: #333;
   --color-primary: #087096;
+  --color-secondary: white;
   --color-background: #fff;
+  --padding-main: 30px;
+  --padding-mobile: 20px;
+  --max-width-main: 1280px;
+  --max-width-sign: 1000px;
 
   --box-shadow: 0 1px 2px 0 rgba(8, 112, 150, 0.7), 1px 2px 4px 0 rgba(8, 112, 150, 0.7),
     2px 4px 8px 0 rgba(8, 112, 150, 0.7), 2px 4px 16px 0 rgba(8, 112, 150, 0.7);
-}
-
-button {
-  all: unset;
-  cursor: pointer;
-  width: 200px;
-  height: 50px;
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--color-font);
-  text-align: center;
-  background-color: var(--color-background);
-  border: none;
-  border-radius: 15px;
-  box-shadow: var(--box-shadow);
-
-  &:hover {
-    color: white;
-    background: var(--color-primary);
-    transition: background-color 0.3s ease;
-  }
 }
 
 * {
@@ -43,11 +19,12 @@ button {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   width: 100%;
   background-color: var(--color-background);
+  background: var(--tg-theme-bg-color);
+  color: var(--tg-theme-text-color);
 }
