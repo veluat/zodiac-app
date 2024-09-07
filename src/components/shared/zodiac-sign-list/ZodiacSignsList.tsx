@@ -1,4 +1,4 @@
-import { ZodiacSign } from '../zodiac-sign/ZodiacSign'
+import { ZodiacSign } from '@/components/shared/zodiac-sign/ZodiacSign.tsx'
 import s from './ZodiacSignsList.module.scss'
 
 interface ZodiacSignsListProps {

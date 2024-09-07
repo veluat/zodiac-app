@@ -5,9 +5,11 @@ interface ZodiacDescriptionViewProps {
   signRu: string
   horoscope: string
   language: 'ru' | 'en'
+  icon: string
 }
 
 export const ZodiacDescriptionView = ({
+  icon,
   signEn,
   signRu,
   horoscope,
@@ -15,8 +17,14 @@ export const ZodiacDescriptionView = ({
 }: ZodiacDescriptionViewProps) => {
   const title = language === 'ru' ? signRu : signEn
 
+  const today = new Date()
+  const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' }
+  const formattedDate = today.toLocaleDateString(language === 'ru' ? 'ru-RU' : 'en-US', options)
+
   return (
     <div className={s.signDescription}>
+      <img src={icon} alt={title} className={s.zodiacIcon} />
+      <p>{formattedDate}</p>
       <h3>{title}</h3>
       <p>{horoscope}</p>
     </div>

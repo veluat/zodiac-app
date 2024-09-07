@@ -1,8 +1,11 @@
-import { useZodiacContext } from '@/hook/useZodiacContext'
-import { ZodiacSignsList } from '@/components/zodiac-sign-list/ZodiacSignsList'
-import { ZodiacDescriptionView } from '@/components/zodiac-description-view/ZodiacDescriptionView'
-import s from './App.module.scss'
+import { useZodiacContext } from '@/hook/useZodiacContext.ts'
+import { ZodiacSignsList } from '@/components/shared/zodiac-sign-list/ZodiacSignsList.tsx'
+import { ZodiacDescriptionView } from '@/components/shared/zodiac-description-view/ZodiacDescriptionView.tsx'
 import { Header } from '@/components/header/Header.tsx'
+import { Footer } from '@/components/footer/Footer.tsx'
+import { ToggleButton } from '@/components/shared/toggle-button/ToggleButton.tsx'
+import { Loader } from '@/components/shared/loader/Loader.tsx'
+import s from './App.module.scss'
 
 const App = () => {
   const {
@@ -16,7 +19,7 @@ const App = () => {
     handleBackClick,
   } = useZodiacContext()
 
-  const isDescriptionView = !!(selectedSign && horoscope)
+  const isDescriptionView = !!selectedSign
 
   return (
     <div className={s.mainBlock}>
@@ -26,13 +29,14 @@ const App = () => {
         onLanguageSwitch={handleLanguageSwitch}
         showBackButton={isDescriptionView}
       />
-
+      {isLoading && <Loader />}
       {isDescriptionView ? (
         <ZodiacDescriptionView
           signEn={selectedSign.signEn}
-          signRu={selectedSign?.signRu || ''}
-          horoscope={horoscope}
+          signRu={selectedSign.signRu || ''}
+          horoscope={horoscope || 'Нет данных'}
           language={language}
+          icon={selectedSign.icon}
         />
       ) : (
         <ZodiacSignsList
@@ -41,7 +45,8 @@ const App = () => {
           zodiacData={zodiacData}
         />
       )}
-      {isLoading && <div>Loading...</div>}
+      <ToggleButton />
+      {isDescriptionView && <Footer language={language} />}
     </div>
   )
 }
