@@ -1,0 +1,36 @@
+.loader {
+  overflow: hidden;
+  width: 7.5rem;
+  margin: 1.25rem auto 0;
+
+  .wrap {
+    background: var(--color-secondary) linear-gradient(45deg, var(--color-secondary), #fed14e);
+    border: 0.125rem solid var(--color-additional-background);
+    width: 0.9375rem;
+    height: 0.9375rem;
+    float: left;
+    margin-left: 0.3125rem;
+    opacity: 0.1;
+    animation: pulse 1.2s infinite;
+
+    .block1 {
+      animation-delay: 0.3s;
+    }
+
+    .block2 {
+      animation-delay: 0.2s;
+    }
+
+    .block3 {
+      animation-delay: 0.1s;
+    }
+
+    .block4 {
+      animation-delay: 0.2s;
+    }
+
+    .block5 {
+      animation-delay: 0.3s;
+    }
+  }
+}
