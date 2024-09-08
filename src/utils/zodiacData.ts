@@ -26,11 +26,15 @@ export interface Translations {
     zodiacSigns: ZodiacSign[]
     backButton: string
     switchLanguage: string
+    footer: string
+    footerLink: string
   }
   en: {
     zodiacSigns: ZodiacSign[]
     backButton: string
     switchLanguage: string
+    footer: string
+    footerLink: string
   }
 }
 
@@ -169,6 +173,8 @@ export const translations: Translations = {
     })),
     backButton: 'Назад',
     switchLanguage: 'Сменить язык',
+    footer: 'Гороскопы предоставлены ',
+    footerLink: 'сайтом Ignio',
   },
   en: {
     zodiacSigns: zodiacSignsData.map(({ signEn, periodEn, icon, id }) => ({
@@ -183,5 +189,7 @@ export const translations: Translations = {
     })),
     backButton: 'Back',
     switchLanguage: 'Switch Language',
+    footer: 'Horoscopes provided by ',
+    footerLink: 'Ignio',
   },
 }
