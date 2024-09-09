@@ -1,17 +1,22 @@
-import sprite from '@/assets/theme/sprite.svg'
+import dark_img from '@/assets/theme/dark.svg'
+import light_img from '@/assets/theme/light.svg'
 import { useTheme } from '@/hook/useTheme.ts'
 import s from './ToggleButton.module.scss'
 
 export const ToggleButton = () => {
   const { theme, toggleTheme } = useTheme()
 
-  const id = theme === 'theme-light' ? 'dark' : 'light'
+  const imgSrc = theme === 'theme-light' ? dark_img : light_img
 
   return (
     <button onClick={toggleTheme} className={s.toggleButton}>
-      <svg className={s.iconSvg} height={50} width={50}>
-        <use xlinkHref={`${sprite}#${id}`} />
-      </svg>
+      <img
+        src={imgSrc}
+        alt={theme === 'theme-light' ? 'Dark theme' : 'Light theme'}
+        className={s.iconSvg}
+        height={35}
+        width={35}
+      />
     </button>
   )
 }
