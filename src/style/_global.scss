@@ -1,15 +1,32 @@
 :root {
-  --color-font: #333;
-  --color-primary: #087096;
-  --color-secondary: white;
-  --color-background: #fff;
-  --padding-main: 30px;
-  --padding-mobile: 20px;
-  --max-width-main: 1280px;
-  --max-width-sign: 1000px;
+  .theme-light {
+    --color-font: #333;
+    --color-font-button: white;
+    --color-primary: #087096;
+    --color-secondary: white;
+    --color-background: #fff;
+    --color-additional-background: #087096;
+    --box-shadow: 0 1px 2px 0 rgba(8, 112, 150, 0.7), 1px 2px 4px 0 rgba(8, 112, 150, 0.7),
+      2px 4px 8px 0 rgba(8, 112, 150, 0.7), 2px 4px 16px 0 rgba(8, 112, 150, 0.7);
+  }
 
-  --box-shadow: 0 1px 2px 0 rgba(8, 112, 150, 0.7), 1px 2px 4px 0 rgba(8, 112, 150, 0.7),
-    2px 4px 8px 0 rgba(8, 112, 150, 0.7), 2px 4px 16px 0 rgba(8, 112, 150, 0.7);
+  .theme-dark {
+    --color-font: #333;
+    --color-font-button: white;
+    --color-primary: #08ffffff;
+    --color-secondary: #ffc107;
+    --color-background: #8b8b8b;
+    --color-additional-background: #00c8c8ff;
+    --box-shadow: 0 0.0625rem 0.125rem 0 rgba(8, 255, 255, 0.7),
+      0.0625rem 0.125rem 0.25rem 0 rgba(8, 255, 255, 0.7),
+      0.125rem 0.25rem 0.5rem 0 rgba(8, 255, 255, 0.7),
+      0.125rem 0.25rem 1rem 0 rgba(8, 255, 255, 0.7);
+  }
+
+  --padding-main: 1.875rem;
+  --padding-mobile: 1.25rem;
+  --max-width-main: 80rem;
+  --max-width-sign: 62.5rem;
 }
 
 * {
@@ -25,6 +42,11 @@ body {
   overflow-x: hidden;
   width: 100%;
   background-color: var(--color-background);
-  background: var(--tg-theme-bg-color);
-  color: var(--tg-theme-text-color);
+}
+
+a {
+  all: unset;
+  color: var(--color-primary);
+  font-weight: 700;
+  cursor: pointer;
 }
