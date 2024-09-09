@@ -1,5 +1,5 @@
 import { translations } from '@/utils/zodiacData.ts'
-import { CommonButton } from '@/components/common-button/CommonButton.tsx'
+import { CommonButton } from '@/components/shared/common-button/CommonButton.tsx'
 import s from './Header.module.scss'
 
 interface HeaderProps {
@@ -19,9 +19,9 @@ export const Header = ({
   const languageSwitcher = translations[language]?.switchLanguage || 'Switch Language'
 
   return (
-    <div className={s.header}>
+    <header className={s.header}>
       {showBackButton && <CommonButton onClick={handleBackClick} title={backButtonLabel} />}
       <CommonButton onClick={onLanguageSwitch} title={languageSwitcher} />
-    </div>
+    </header>
   )
 }
