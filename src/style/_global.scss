@@ -1,6 +1,7 @@
 :root {
   .theme-light {
     --color-font: #333;
+    --color-common-font: #333;
     --color-font-button: white;
     --color-primary: #087096;
     --color-secondary: white;
@@ -12,6 +13,7 @@
 
   .theme-dark {
     --color-font: #333;
+    --color-common-font: white;
     --color-font-button: white;
     --color-primary: #08ffffff;
     --color-secondary: #ffc107;
