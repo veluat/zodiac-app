@@ -1,9 +1,10 @@
 import s from './ZodiacDescriptionView.module.scss'
+import { ReactNode } from 'react'
 
 interface ZodiacDescriptionViewProps {
   signEn: string
   signRu: string
-  horoscope: string
+  horoscope: ReactNode
   language: 'ru' | 'en'
   icon: string
 }

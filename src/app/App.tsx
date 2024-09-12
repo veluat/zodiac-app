@@ -34,7 +34,7 @@ const App = () => {
         <ZodiacDescriptionView
           signEn={selectedSign.signEn}
           signRu={selectedSign.signRu || ''}
-          horoscope={horoscope || 'Нет данных'}
+          horoscope={horoscope || <Loader />}
           language={language}
           icon={selectedSign.icon}
         />
